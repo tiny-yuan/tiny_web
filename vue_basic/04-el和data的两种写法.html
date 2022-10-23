@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../vue/vue.js"></script>
+    <title>初识vue</title>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <h1>hello,{{name}}</h1>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
+
+        // 创建vue实例
+        const v = new Vue({
+            el:"#root" ,//第一种方法
+            // data的第一种写法 对象
+            // data:{
+            //     // data中用于存储数据，数据供所指定的容器是去使用，值我们暂时先写成一个对象
+            //     name:'tiny'
+            // }
+
+
+            // data的第二种写法，函数 组纪应用时必须用函数方法
+
+            // 不能写箭头函数
+            // data:function(){
+            //     console.log('@@@',this) //此处的this是Vue实例对象
+            //     return{
+            //         name:'tiny'
+            //     }
+            // }
+
+            // 简写
+            data(){
+                console.log('@@@',this) //此处的this是Vue实例对象
+                return{
+                    name:'tiny'
+                }
+            }
+        })
+        // console.log(v)
+        
+        // v.$mount('#root') // 第二种方法
+        
+
+    </script>
+
+</body>
+</html>
