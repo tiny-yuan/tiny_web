@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue/vue.js"></script>
+    <title>深度监视</title>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div id="root">
+        <!-- <h2>今天天气很好{{isHot ? '炎热':'凉爽'}}</h2> -->
+        <h2>今天天气很好{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+        <!-- @可以写简单的语句 -->
+        <!-- <button @click="isHot = !isHot">切换天气</button> -->  
+
+        <hr>
+        <h2>a的值：{{number.a}}</h2>
+        <button @click="number.a++">点我+1</button>
+
+        <hr>
+        <h2>b的值：{{number.b}}</h2>
+        <button @click="number.b++">点我+1</button>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
+
+        // 创建vue实例
+        const vm =new Vue({
+            el:"#root",
+            data:{
+                // data中用于存储数据，数据供所指定的容器是去使用，值我们暂时先写成一个对象
+                isHot:true,
+                number:{
+                    a:1,
+                    b:2
+                }
+            },
+            computed:{
+                info(){
+                    return this.isHot ? '炎热':'凉爽'
+                }
+            },
+            methods: {
+                changeWeather(){
+                    this.isHot = !this.isHot
+                }
+            },
+
+            // 方法一
+            watch:{
+                isHot:{
+                    // 初始化时让handler调用一下
+                    immediate:true,
+                    // 当isHot的值发生变化时，hanler被调用
+                    handler(newValue,oldValue){
+                        console.log('isHot被修改了',newValue,oldValue)
+                    },       
+                    },
+
+                // 监视多级结构中某个属性的变化
+                // 'number.a':{
+                //     immediate:true,
+                //     handler(newValue,oldValue){
+                //         console.log('a被修改了',newValue,oldValue)
+                //         },
+                //     }
+
+                // 监视多级结构中所有属性的变化
+                number:{
+                    deep:true,
+                    // immediate:true,
+                    handler(newValue,oldValue){
+                        console.log('a被修改了',newValue,oldValue)
+                        },
+                    }
+            }
+            
+        })
+        
+
+    </script>
+
+</body>
+</html>
