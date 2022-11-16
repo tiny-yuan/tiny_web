@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue/vue.js"></script>
+    <title>03计算属性实现</title>
+</head>
+<body>
+    <!-- 
+    1、computed能完成的功能，watch都能完成 
+    2、watch能完成的功能，computed不一定能完成。例如watch可以进行异步操作
+
+    3、所有被vue管理的函数最好都写成普通函数，这样this的指向才是vm 或者组件实例对象
+    4、所有不被Vue所管理的函数（定时器的回调函数、ajax的回调函数等，promise的回调函数）最好写成箭头函数，这样this的指向才是vm或者组件实例对象
+-->
+    <!-- 准备一个容器 -->
+    <div id="root">
+        姓：<input type="text" v-model="firstName"><br><br>
+        名：<input type="text" v-model="lastName"><br><br>
+        全名：<span>{{fullName}}</span><br><br>
+        <!-- <span>{{a}}</span> -->
+        <!-- <button @click="">点我</button> -->
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
+
+        // 创建vue实例
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                // data中用于存储数据，数据供所指定的容器是去使用，值我们暂时先写成一个对象
+                firstName:'杨',
+                lastName:'大米',
+                // x:1,
+                // y:2,
+                fullName:'张-三',
+
+            },
+            // computed:{
+            //     a(){
+            //         return this.x + this.y
+            //     }
+            // },
+            // 计算属性是用返回值传输，无法实现异步操作
+            watch:{
+                // 设置延时
+                firstName(Val){
+                    setTimeout(() => {
+                        this.fullName = Val + '-' + this.lastName
+                    }, 1000);
+                    // 1000 毫秒 1秒
+                },
+                lastName(Val){
+                    this.fullName = this.firstName + '-' + Val             
+                }
+            }
+        })
+        
+
+    </script>
+
+</body>
+</html>
+

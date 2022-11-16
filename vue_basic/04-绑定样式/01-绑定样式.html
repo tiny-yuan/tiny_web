@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../../vue/vue.js"></script>
+    <title>绑定样式</title>
+    <style>
+        .basic{
+            height: 200px;
+            width: 400px;
+            background-color: aqua;
+        }
+        .yellow{
+            height: 200px;
+            width: 400px;
+            background-color: yellow;
+        }
+        .red{
+            height: 200px;
+            width: 400px;
+            background-color: red;
+        }
+        .test1{
+            height: 200px;
+            width: 400px;
+            background-color: plum;
+        }
+        .test2{
+            font-size: large;
+        }
+        .test3{
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- 准备一个容器 -->
+    <div class="root">
+        <!-- 绑定class样式 字符串写法 适用于：样式的类名不确定，需要动态指定-->
+        <div class="basic" :class="color" @click="change">
+            <h1>hello,{{name}}，你真可爱！</h1>
+        </div>
+        <br><br>
+
+        <!-- 绑定class样式 数组写法 适用于：要绑定的样式的类名不确定，个数也不确定-->
+        <div class="basic" :class="arr">
+            <h1>hello,{{name}}，你真可爱！</h1>
+        </div>
+
+        <br><br>
+
+        <!-- 绑定class样式 对象写法 适用于：要绑定的样式的类名确定，个数也确定-->
+        <div class="basic" :class="classObj" >
+            <h1>hello,{{name}}，你真可爱！</h1>
+        </div>
+
+        <!-- 绑定style样式 对象写法 -->
+        <!-- <div class="basic" style="font-size: 20px;"> -->
+        <!-- <div class="basic" :style="{fontSize: fsize + 'px'}"> -->
+        <!-- <div class="basic" :style="styleObj0"> -->
+        <div class="basic" :style="[styleObj0,styleObj1]">
+            <h1>hello,{{name}}，你真可爱！</h1>
+        </div>
+        <br><br>
+        <!-- 绑定style样式 数组写法 -->
+        <div class="basic" :style="styleArr">
+            <h1>hello,{{name}}，你真可爱！</h1>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
+
+        // 创建vue实例
+        const x = new Vue({
+            el:".root",
+            data:{
+                // data中用于存储数据，数据供所指定的容器是去使用，值我们暂时先写成一个对象
+                name:'杨小敏',
+                address:'北京',
+                color:"yellow",
+                arr:['test1','test2','test3'],
+                classObj:{
+                    test1:false,
+                    test2:false,
+                },
+                // fsize:20
+                styleObj0:{
+                    fontSize: '20px',
+                    color: 'red',
+                },
+                styleObj1:{
+                    backgroundColor: 'yellow'
+                },
+                styleArr: [                
+                {
+                    fontSize: '20px',
+                    color: 'red',
+                },
+                {
+                    backgroundColor: 'black'
+                }
+                ],
+            },
+            methods: {
+                change(){
+                    const arr = ['basic','yellow','red']
+                    const index = Math.floor(Math.random()*3)
+                    this.color = arr[index]
+                }
+            },
+        })
+        
+
+    </script>
+
+</body>
+</html>

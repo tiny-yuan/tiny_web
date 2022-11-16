@@ -5,34 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入Vue -->
-    <script type="text/javascript" src="../vue/vue.js"></script>
+    <script type="text/javascript" src="../../vue/vue.js"></script>
     <title>初识vue</title>
 </head>
 <body>
     <!-- 准备一个容器 -->
     <div id="root">
-        <h1>插值语法</h1>
-        <h1>hello,{{name}}</h1>
-        <hr>
-        <h1>指令语法</h1>
-        <a v-bind:href="url">点我去{{names.name1}}</a>
-        <a :href="url">点我去{{names.name2}}</a>
-
+        <h1>学校名称：{{name}}</h1>
+        <h1>学校地址：{{address}}</h1>
     </div>
     <script type="text/javascript">
         Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
 
         // 创建vue实例
-        const x = new Vue({
+        const vm =new Vue({
             el:"#root",
             data:{
                 // data中用于存储数据，数据供所指定的容器是去使用，值我们暂时先写成一个对象
-                name:'tiny',
-                url:'http://www.baidu.com',
-                names:{
-                    name1 :'百度1',
-                    name2 :'百度2'
-                }
+                name:'北京大学',
+                address:'北京'
             }
         })
         

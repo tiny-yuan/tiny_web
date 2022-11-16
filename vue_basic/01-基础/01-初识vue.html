@@ -5,20 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入Vue -->
-    <script type="text/javascript" src="../vue/vue.js"></script>
+    <script type="text/javascript" src="../../vue/vue.js"></script>
     <title>初识vue</title>
 </head>
 <body>
     <!-- 准备一个容器 -->
     <div id="root">
-        <!-- 普通写法 -->
-        <!-- 单向数据绑定：<input type="text" v-bind:value="name"><br>
-        双向数据绑定：<input type="text" v-model:value="name"><br> -->
-        <!-- v-model只能用在表单类元素（输入元素）上 -->
-
-        <!-- 简写 -->
-        单向数据绑定：<input type="text" :value="name"><br>
-        双向数据绑定：<input type="text" v-model="name"><br>
+        <h1>hello,{{name}}，你真可爱！</h1>
     </div>
     <script type="text/javascript">
         Vue.config.productionTip = false // 阻止vue 在启动时生成生产提示
@@ -28,7 +21,8 @@
             el:"#root",
             data:{
                 // data中用于存储数据，数据供所指定的容器是去使用，值我们暂时先写成一个对象
-                name:'tiny',
+                name:'杨小敏',
+                address:'北京'
             }
         })
         
