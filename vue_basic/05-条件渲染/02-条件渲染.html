@@ -18,11 +18,23 @@
 <body>
     <!-- 准备一个容器 -->
     <div id="root">
-        <button @click="changeInfo">切换显示</button>
         <!-- v-show 就是调整display的值 为true显示 为false不显示-->
-        <!-- v-if 就是调整display的值 为true显示 为false不显示  但是if会将字段结构均消失-->
-        <h1 class="demo" v-show="a"> hello,{{name}}，你真可爱！</h1>
+        <!-- v-if 就是调整display的值 为true显示 为false不显示  但是if会将字段结构均消失  也试用与多个判断-->
+        <h1 class="demo"> 当前的值是{{n}}</h1>
         <!-- <h1 class="demo" v-if="a"> hello,{{name}}，你真可爱！</h1> -->
+        <button @click="n++">点我+1</button>
+        <!-- <div v-if="n === 1">Angular</div>
+        <div v-else-if="n === 2">React</div>
+        <div v-else-if="n === 3">Vue</div>
+        <div v-else>哈哈</div> -->
+
+        <!-- 不展示的DOM直接移除 v-if与template配合使用-->
+
+        <template v-if="n === 1">
+            <h2>李大爷 </h2>
+            <h2>你好啊</h2>
+            <h2>你真棒</h2>
+        </template>
         <br><br>
     </div>
 
@@ -34,20 +46,7 @@
             el:"#root",
             data:{
                 // data中用于存储数据，数据供所指定的容器是去使用，值我们暂时先写成一个对象
-                name:'杨小敏',
-                address:'北京',
-                a:true
-            },
-            computed:{
-                info(){
-                    return this.a ? 'true':'false'
-                }
-
-            },
-            methods: {
-                changeInfo(){
-                    this.a = !this.a
-                }
+                n : 0
             },
         })
         
